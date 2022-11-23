@@ -1,0 +1,23 @@
+Kontrollfrage
+a)
+"same"
+"conv" : bringt die zentral Teil der Faltung zurück, die gleiche Größ wie eingegeben Vektor
+"conv2": bringt die zentral Teil der Faltung zurück, die gleiche Größ wie erste eingegeben Matrix
+ 
+"full" 
+"conv" : bringt ganze Faltung zurück
+"conv2": bringt ganze 2-D Faltung zurück
+
+"valid"
+"conv" : bringt nur die Teile der Faltung, die nicht mit dem Zero-Padded berechnet werden, zurück. Die Länge davon ist nicht gleich zu eingegeben Vektor
+"conv2": bringt nur die Teile der Faltung, die nicht mit dem Zero-Padded berechnet werden, zurück.
+
+b) 
+Fast gleich von Spiegelung gibt es Reflection Padding. Die Unterschied ist: die Rand wird nicht reflexiert, sondern handelt es nur mit die nachfolgende Wert. 
+Das ist hilfreich, wenn zB: die Rande des Bild halten unwichtige Wert.
+
+c)
+- Ableitungsfilter normaliziert das beliebige Wert gemäß nachbarschaftliche Bereich mithilfe eines gegeben Distanz zum Nomalizieren
+- Glättung reduziert Bildrauschen mithilfe Ausrechnen des Mittelwertfilter
+
+d) die Einstellung von Fernsterfunktion, Intensität wirkt einen Einfluss auf die Wahl der detektierten Ecken. 

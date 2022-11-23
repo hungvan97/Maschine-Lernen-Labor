@@ -1,0 +1,8 @@
+Aufgaben:
+- 1): Vorlage bayes_test.m nutzen
+- a): Mittelwerte und Varianzen für jedes Geschlecht berechnen
+- b): Kovarianzmatrix berechnen
+- c): die geschätzten Verteilungen für jedes Merkmal (1D, Verwendung der Varianz) und die gemeinsame Verteilung (2D, Verwendung der Kovarianzmatrix) visualisieren
+- d): Klassifikation mit naiven Bayes-Klassifikator
+- e): Klassifikation mit Bayes-Klassifikator
+- 2): CellDetect.m vervollständigen

@@ -1,0 +1,19 @@
+Aufgaben:
+- 1a): Region-Growing-Algorithmus implementieren in "regionGrowing.m": ausgehend von einem Startpixel werden benachbarte Pixel hinzugefügt (=> wie ein Steppenbrand, wo sich das Feuer immer den günstigsten Weg zur Ausbreitung sucht)
+=> Randbehandlung beim Bestimmen von Nachbarpixeln beachten
+=> verschiedene Arten der Indizierung: Nachbarn können über Subscripts oder Indizes repräsentiert werden (d.h. Liste oder Matrix verwenden, um Nachbarn zu speichern; entsprechend sub2ind und ind2sub nutzen (teilweise schon bekannt))
+=> Werte löschen: relevant, um Punkte aus Nachbarschaftsmenge zu entfernen
+=> ismember ist aufwendig => anders lösen!
+=> Datentypen beachten!
+- 1b): ein eigenes Testskript für Region-Growing schreiben
+- 2a): Dokumentation lesen
+- 2b): das Ergebnis wird auf Anhieb nicht zufriedenstellend sein, Vorverarbeitung ist notwendig
+=> hilfreiche Links:
+- https://de.mathworks.com/help/images/ref/watershed.html
+- https://de.mathworks.com/help/images/marker-controlled-watershed-segmentation.html
+- https://de.mathworks.com/company/newsletters/articles/the-watershed-transform-strategies-for-image-segmentation.html
+- http://www.cmm.mines-paristech.fr/~beucher/wtshed.html
+
+https://de.mathworks.com/help/images/ref/watershed.html
+https://de.mathworks.com/help/images/marker-controlled-watershed-segmentation.html
+https://de.mathworks.com/company/newsletters/articles/the-watershed-transform-strategies-for-image-segmentation.html
