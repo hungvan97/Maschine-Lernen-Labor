@@ -101,4 +101,4 @@
     if prob_einfach_f > prob_einfach_m
         clf_einfach = "weiblich";
     end
-    disp(["Actually, it was ", clf_naive])
+    disp(["Actually, it was ", clf_einfach])

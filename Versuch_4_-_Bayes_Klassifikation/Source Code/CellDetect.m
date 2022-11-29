@@ -60,8 +60,8 @@ for it = 1:size(pos_images, 3)
     im = pos_images(:, :, it);
     
     % TODO
-    Zellkerns_p = mean(im(mask ==1));
-    Zellwand_p = mean(im(mask== 3));
+    Zellkerns_p = mean(im(mask ==3));
+    Zellwand_p = mean(im(mask==1));
     Merkmal_p (it)= abs(Zellkerns_p - Zellwand_p);
     
 end
@@ -87,8 +87,8 @@ end
 for it = 1:size(neg_images, 3)
     im = neg_images(:, :, it);  
     % TODO
-    Zellkerns_n = mean(im(mask == 1));
-    Zellwand_n = mean(im(mask== 3));
+    Zellkerns_n = mean(im(mask ==3));
+    Zellwand_n = mean(im(mask==1));
     Merkmal_n(it)= abs(Zellkerns_n - Zellwand_n); 
     
 end
@@ -128,7 +128,8 @@ end
 %% Bild(ausschnitte) klassifizieren und gefundene Zellen markieren
 
 % Testbild laden
-img = im2double(rgb2gray(imread('CellDetectPreFreeze.jpg')));
+%img = im2double(rgb2gray(imread('CellDetectPreFreeze.jpg')));
+img = im2double(rgb2gray(imread('CellDetectFreeze.jpg')));
 
 
 % Bild mit einem "Sliding Window" absuchen und Zellen über die Differenz des
@@ -141,8 +142,8 @@ img = im2double(rgb2gray(imread('CellDetectPreFreeze.jpg')));
     for i=1:5:m-100 
         for j=1:5:n-100     
             im=img(i:i+100,j:j+100);
-            Zellkerns_i = mean(im(mask ==1));
-            Zellwand_i = mean(im(mask== 3));
+            Zellkerns_i = mean(im(mask ==3));
+            Zellwand_i = mean(im(mask==1));
             Merkmal_i = abs(Zellkerns_i - Zellwand_i);
             
             if Merkmal_i<=b && Merkmal_i>= a 
@@ -156,7 +157,9 @@ img = im2double(rgb2gray(imread('CellDetectPreFreeze.jpg')));
 % Bild und gefundene Zellen darstellen
  
     % TODO
-    figure, imshow(img);
+    figure(5), imshow(img);
+    hold on;
+    figure(5);
     hold on;
     for i=1:length(row)
         plot(col(i),row(i),'r-o');
