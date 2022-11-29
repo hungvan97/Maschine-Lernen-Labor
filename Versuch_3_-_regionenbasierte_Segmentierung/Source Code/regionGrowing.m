@@ -25,13 +25,14 @@ function S = regionGrowing(I, xStart, yStart, threshold)
         % 5. find the neighbor which has the minimum different with
         % observed Pixel
         
-        for i = 1:length(apList(:, 1))
-            diff = abs(I_gray(apList(i, 1), apList(i, 2)) - regionMean);
-            if diff < min_diff
-                min_diff = diff;
-                min_inx = i;          
-            end  
-        end 
+%         for i = 1:length(apList(:, 1))
+%             diff = abs(I_gray(apList(i, 1), apList(i, 2)) - regionMean);
+%             if diff < min_diff
+%                 min_diff = diff;
+%                 min_inx = i;          
+%             end  
+%         end 
+%         min() stattdessen anwenden
         
         % 6-7-8. in case we don't find any more neighbor Pixel
         if min_inx == 0

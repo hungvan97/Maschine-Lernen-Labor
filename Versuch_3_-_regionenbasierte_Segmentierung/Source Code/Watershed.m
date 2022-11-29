@@ -1,6 +1,6 @@
 
 %% Vorverarbeitung
-I = imread ('Emphysem.png'); 
+I = imread ('./bilder/Emphysem.png'); 
 I = rgb2gray(I);
 figure, imshow (I);
 I1  = imbinarize(I); 
