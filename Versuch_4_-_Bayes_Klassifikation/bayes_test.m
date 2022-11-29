@@ -86,7 +86,7 @@
     height_input = input("Bitte geben Sie die Größe: ");
     weight_input = input("Bitte geben Sie das Gewicht: ");
     clf_naive = NaiveGeschlechtClassify(height_input, weight_input, mean_height_m, mean_height_f, mean_weight_m, mean_weight_f, ...
-    var_height_m, var_height_f, var_weight_m, var_weight_f);
+        var_height_m, var_height_f, var_weight_m, var_weight_f);
     disp(["Based on Naive Classification, it was ", clf_naive])
     
 %% Bayes Klassifikator
