@@ -11,15 +11,23 @@
     weight_f_in_kg = data.weight_f_in_kg;
     
     % TODO
-    mean_height_m = 1/length(height_m_in_cm)*sum(height_m_in_cm);
-    mean_height_f = 1/length(height_f_in_cm)*sum(height_f_in_cm);
-    mean_weight_m = 1/length(weight_m_in_kg)*sum(weight_m_in_kg);
-    mean_weight_f = 1/length(weight_f_in_kg)*sum(weight_f_in_kg);
+%     mean_height_m = 1/length(height_m_in_cm)*sum(height_m_in_cm);
+%     mean_height_f = 1/length(height_f_in_cm)*sum(height_f_in_cm);
+%     mean_weight_m = 1/length(weight_m_in_kg)*sum(weight_m_in_kg);
+%     mean_weight_f = 1/length(weight_f_in_kg)*sum(weight_f_in_kg);
+    mean_height_m = mean(height_m_in_cm);
+    mean_height_f = mean(height_f_in_cm);
+    mean_weight_m = mean(weight_m_in_kg);
+    mean_weight_f = mean(weight_f_in_kg);
     
     var_height_m = sqrt(1/(length(height_m_in_cm)-1)*sum((height_m_in_cm - mean_height_m).^2));
     var_height_f = sqrt(1/(length(height_f_in_cm)-1)*sum((height_f_in_cm - mean_height_f).^2));
     var_weight_m = sqrt(1/(length(weight_m_in_kg)-1)*sum((weight_m_in_kg - mean_weight_m).^2));
     var_weight_f = sqrt(1/(length(weight_f_in_kg)-1)*sum((weight_f_in_kg - mean_weight_f).^2));
+%     var_height_m = sqrt(var(height_m_in_cm));
+%     var_height_f = var(height_f_in_cm);
+%     var_weight_m = var(weight_m_in_kg);
+%     var_weight_f = var(weight_f_in_kg);
 %% Darstellung der geschätzen Verteilungen
 
     % TODO
