@@ -10,21 +10,10 @@ function L = kmeans(X, w, k)
     % 1.1. choose randomly k point in Eingangdaten X 
     seed = randsample(X(:, 1),k);                               % seed now contains k choosen data-point
     % 1.2. assign k point to k cluster centrum
-    L = zeros(1, length(X));
-%     L_ctr = zeros(1,k);                                         % array of cluster, contains index of data-point
+    L = zeros(1, length(X));                                        % array of cluster, contains index of data-point
     [~, idx_seed] = ismember(seed, X(:, 1));
-%     L_ctr = L_ctr + idx_seed;
     ctr = [X(idx_seed, 1) X(idx_seed, 2)];                      % array of centroid
-%     i_cluster = 1;
-%     for i = 1:k
-%         if ismember(seed(i), X)
-%             [~, idx] = ismember(seed(i), X);
-% %             L(idx) = i_cluster;
-% %             akt_L(idx) = 1;
-% %             i_cluster = i_cluster + 1;
-%             L_new = L_new + idx;               
-%         end
-%     end
+
     % 2. assign cluster to every element of input X
     while true 
         L_old = L;
@@ -45,4 +34,5 @@ function L = kmeans(X, w, k)
             ctr(i, 2) = mean(X(L == i, 2));
         end 
     end
+    ctr
 end

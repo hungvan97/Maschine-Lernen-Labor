@@ -1,0 +1,7 @@
+clear all;
+
+data = load ('test_data_clustering.mat');
+X = data.X1;
+
+L = kmeans(X, 1, );
+plotClusterResults(X, L);
