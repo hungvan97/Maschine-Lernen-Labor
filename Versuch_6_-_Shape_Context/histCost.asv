@@ -2,9 +2,7 @@ function HC = histCost(SCx, SCy)
 % Chi^2-Test zum Vergleich zweier Histogramme
     
     % TODO
-    %HC = 0.5 * sum(sum((SCx - SCy).^2 ./ (SCx + SCy))); <= nenner = 0 at
-    %some point, don't use this.
-    
+    %HC = 0.5 * sum(sum((SCx - SCy).^2 ./ (SCx + SCy))); <== can't
     [m, n] = size(SCx);
     HC = 0;
     for i = 1:m

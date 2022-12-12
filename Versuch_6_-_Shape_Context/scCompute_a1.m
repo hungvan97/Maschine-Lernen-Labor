@@ -1,6 +1,6 @@
 data = load('ShapeContextData.mat');
 
-number = 9;
+number = 8;
 for i=1:length(data.label_train)
     if data.label_train(i) == number
         zif = data.train_data(:, :, i);
@@ -9,14 +9,14 @@ for i=1:length(data.label_train)
 end
 
 % add Parameter for scComputer
-nPoints = 100;
+nPoints = 50;
 % zif = data.train_data(:, :, i);
 X = getEdgePoints(zif, nPoints);
 P = [0.5,0.5];
 nBinsTheta = 20;
 nBinsR = 5;
-rMin = 0.1;
-rMax=0.6;
+rMin = 0.01;
+rMax = 0.3;
 
 
 % scCompute
@@ -50,6 +50,8 @@ line(rMax*cs + P(1), rMax*sn + P(2),'LineStyle', ':', ...
     'Color', 'k', 'LineWidth', 1);
 
 axis equal;
-axis off;
+axis on;
 hold off;
+
+
 subplot(2,2,[3 4]),imagesc(SC),colormap(gray),colorbar,xlabel('theta'),ylabel('r'),title('Shape Context Deskriptor - Histogram');
