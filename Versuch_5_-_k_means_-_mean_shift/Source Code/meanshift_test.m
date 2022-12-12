@@ -182,7 +182,7 @@ img = im2double(rgb2gray(imread('CellDetectPreFreeze.jpg')));
     
  %% Mean-Shift Clustering
  X = [col, row ];
- [L, C] = meanshift(X, 15, 0 );
+ [L, C] = meanshift(X, 15, 0);
  
  
  figure(6), imshow('CellDetectPreFreeze.jpg');
