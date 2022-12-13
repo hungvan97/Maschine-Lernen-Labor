@@ -1,25 +1,24 @@
-function HC = histCost_neu(sc1,sc2)
+function HC = histCost_a2(SCx, SCy) % 1 for testing, 1 for training
+% SCx, SCy: 5(r_group)x50(theta_group)x50(layer)
 % Chi^2-Test zum Vergleich zweier Histogramme
-   m=size(sc1,3);
-   n=size(sc2,3);
-   Tmp=zeros(m,n);
-   norm1=0;
-   norm2=0;
-   for i=1:m
-       for j=1:n
-           Tmp(i,j)=histCost(sc1(:,:,i),sc2(:,:,j));
-       end
-   end
-   sum1=0;
-   for i=1:m
-       sum1=sum1+min(Tmp(i,:));
-       norm1=norm1+norm(sc1(:,:,i));
-   end
-   sum2=0;
-   for i=1:n
-       sum2=sum2+min(Tmp(:,i));
-       norm2=norm2+norm(sc2(:,:,i));
-   end
-   HC=sum1/norm1+sum2/norm2;
     
+    % TODO
+    HC = mean_chi(SCx, SCy) + mean_chi(SCy, SCx);
+    
+    function meanChi = mean_chi(SCx, SCy)
+        x = size(SCx, 3);
+        y = size(SCy, 3);
+        sum_hist = zeros(x, y);
+        sum_min = 0;
+        sum_norm = 0;
+        for i = 1:x
+            for j = 1:y
+                sum_hist(i, j) = histCost(SCx(:, :, i), SCy(:, :, j));
+            end
+            sum_min = sum_min + min(sum_hist(i, :));
+            % sum_norm: https://math.stackexchange.com/questions/3044929/l2-norm-of-a-matrix-is-this-statement-true
+            sum_norm = sum_norm + norm(SCx(:, :, i));
+        end
+        meanChi = sum_min / sum_norm;
+    end
 end
