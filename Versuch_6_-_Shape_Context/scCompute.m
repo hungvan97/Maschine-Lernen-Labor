@@ -1,6 +1,7 @@
 function SC = scCompute(P, X, nBinsTheta, nBinsR, rMin, rMax)
     
-    n = size(P, 1);      % Anzahl Punkte in P (Aufgabe 1: n = 1)
+%     n = 1;      % Anzahl Punkte in P (Aufgabe 1: n = 1)
+    n = size(P, 1);      % Anzahl Punkte in P (Aufgabe 2: n > 1)
     m = size(X, 1);      % Anzahl Punkte in X
     
     % Bestimme Abstände der Punkte X zu den Punkten P.
@@ -102,7 +103,3 @@ function SC = scCompute(P, X, nBinsTheta, nBinsR, rMin, rMax)
     % Histogramm normalisieren -> Wahrscheinlichkeiten
     SC = SC ./ (repmat(sum(sum(SC, 1), 2), [size(SC, 1), size(SC, 2), 1]) + eps);
 end
-
-
-
-

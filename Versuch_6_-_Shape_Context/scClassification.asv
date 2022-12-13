@@ -4,7 +4,7 @@ clc;
 
 %% Daten laden
 load('ShapeContextData.mat')
-aufgabe = "2c";
+aufgabe = "2a";
 
 %% Shape Context für alle Trainingsdaten bestimmen
 %  Einfache Variante: Bestimme Histogramm für Bildmittelpunkt
@@ -53,8 +53,8 @@ for it = 1:size(test_data, 3)
     end
      
     % Vergleich mit Shape Context der Trainingsdaten
-    HC = zeros(1, size(train_data, 3));
-    for it_train = 1:size(train_data, 3)
+    HC = zeros(1, size(train, 3));
+    for it_train = 1:size(SC_train, 3)
         % for each layer in 3-dimension of SC_train, compare the histograme
         % in it to the histograme (which is used to test) in SC
         if aufgabe == "2a"

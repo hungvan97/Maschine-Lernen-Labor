@@ -77,7 +77,7 @@ disp(['Different between 2 histogram is: ', num2str(hc_diff)]);
 if hc_diff < 0.4
     disp('Quite similar, huh!!');      % got this result when compare two "3" at image 5, 9 
 else
-    disp('Not so similar at');         % got this result when compare two "1" at image 2, 3 (or 2, 7)
+    disp('Not so similar');         % got this result when compare two "1" at image 2, 3 (or 2, 7)
 end
 
 % helper function

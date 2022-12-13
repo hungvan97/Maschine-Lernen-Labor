@@ -24,8 +24,10 @@ SC = scCompute(P, X, nBinsTheta, nBinsR, rMin, rMax);
 
 % plot
 figure(1);
+%PLOT ORIGINAL
 subplot(2,2,1),imshow(zif),title('Original Bild');
 
+%PLOT RAND
 subplot(2,2,2), title('Menge der bestimmten Randpunkte');
 gca;
 hold on;
@@ -53,5 +55,5 @@ axis equal;
 axis on;
 hold off;
 
-
+% PLOT HISTOGRAM
 subplot(2,2,[3 4]),imagesc(SC),colormap(gray),colorbar,xlabel('theta'),ylabel('r'),title('Shape Context Deskriptor - Histogram');
