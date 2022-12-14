@@ -4,7 +4,7 @@ clc;
 
 %% Daten laden
 load('ShapeContextData.mat')
-aufgabe = "2c";
+aufgabe = "2a";
 
 %% Shape Context für alle Trainingsdaten bestimmen
 %  Einfache Variante: Bestimme Histogramm für Bildmittelpunkt

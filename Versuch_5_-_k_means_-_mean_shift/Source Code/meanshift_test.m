@@ -26,14 +26,14 @@ end
     % Bestimmt  die "durchschnittliche" Zelle aus den Beispielbildern in der 3. Dimension.
     % gibt den Mittelwert entlang 3. Dimension zurück.
     B = imadjust(A);
-    figure(1),imshow(B);
+%     figure(1),imshow(B);
 
 
 % Histogramm bestimmen
 % Befehl: imhist
 
     % TODO
-    figure(2), imhist(B);
+%     figure(2), imhist(B);
 
 % Schwellwerte aus Histogramm bestimmen (manuell oder automatisch) und
 % Zellen-Labelbild aus der Durchschnittszelle definieren, z.B.
@@ -49,7 +49,7 @@ end
     % Segmentieren  das Bild mit imquantize in drei Ebenen
     % imquantize(A,levels) quantisiert Bild A unter Verwendung spezifizierter Quantisierungswerte, die in den N Elementvektorleveln enthalten sind.
     rgb = label2rgb(mask);
-    figure(3),imshow(rgb);
+%     figure(3),imshow(rgb);
 
 %% Bestimmung der Verteilungsfunktionen
 %  Als Merkmal wird die Differenz des mittleren Grauwerts von Zellkern und
@@ -118,22 +118,22 @@ end
     % Probability density function oder  Wahrscheinlichkeitsdichtefunktion
     % gibt das pdf der Wahrscheinlichkeitsverteilung zurück, ausgewertet anhand der Werte in x.
     pd_neg=pdf(pd_n,xgrid);
-    figure(4);
-    plot(xgrid,pd_pos,'r');
-    hold on;
-    plot(xgrid,pd_neg,'b');
-    hold on;
+%     figure(4);
+%     plot(xgrid,pd_pos,'r');
+%     hold on;
+%     plot(xgrid,pd_neg,'b');
+%     hold on;
     
 % Schwellwert bestimmen, der eine (optimale) Trennung zwischen Zelle und
 % Hintergrund auf der Basis des Merkmals angibt und im Plot markieren
 
-    % TODO
-    [a, b] = polyxpoly(xgrid,pd_pos,xgrid,pd_neg);
-    x = [a, a];
-    y = [0, max(pd_neg)];
-    plot(x,y,'k');
-    hold off;
-    legend('good','bad');
+%     % TODO
+%     [a, b] = polyxpoly(xgrid,pd_pos,xgrid,pd_neg);
+%     x = [a, a];
+%     y = [0, max(pd_neg)];
+%     plot(x,y,'k');
+%     hold off;
+%     legend('good','bad');
 
 
 %% Bild(ausschnitte) klassifizieren und gefundene Zellen markieren

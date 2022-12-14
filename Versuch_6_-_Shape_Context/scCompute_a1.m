@@ -1,6 +1,6 @@
 data = load('ShapeContextData.mat');
 
-number = 8;
+number = 3;
 for i=1:length(data.label_train)
     if data.label_train(i) == number
         zif = data.train_data(:, :, i);

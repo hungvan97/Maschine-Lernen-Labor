@@ -10,8 +10,8 @@ data = load('ShapeContextData.mat');
 %     end
 % end
 
-zif1 = data.train_data(:, :, 3);
-zif2 = data.train_data(:, :, 7);
+zif1 = data.train_data(:, :, 5);
+zif2 = data.train_data(:, :, 13);
 
 % add Parameter for scComputer
 nPoints = 50;
