@@ -32,8 +32,8 @@ subplot(2,3,1), imshow(imgCorrupt), title('Original Image Corrupt');
 
 cl = imclose(imgCorrupt, strel("square", 6));
 op = imopen(cl, strel("disk", 9));
-line90 = imclose(op, strel('line', 12, 90));  % vertical gap from row 350 - 360 ( col > 490 )
-line0 = imclose(line90, strel('line', 12, 0));% horizontal gap from col 350 - 360 ( row > 700 )
+line90 = imclose(op, strel('line', 12, 90));  % vertical gap from row 350 - 360 ( col > 490 ) ==> dilate still fine
+line0 = imclose(line90, strel('line', 12, 0));% horizontal gap from col 350 - 360 ( row > 700 ) ==> dilate still fine
 imnew = imdilate(line0, strel("disk", 10));
 
 subplot(2,3,2), imshow(cl), title('Close');
