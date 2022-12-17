@@ -135,11 +135,19 @@ end
 %     hold off;
 %     legend('good','bad');
 
+ % TODO
+    [a, b] = polyxpoly(xgrid,pd_pos,xgrid,pd_neg);
+    x = [a, a];
+    y = [0, max(pd_neg)];
+    plot(x,y,'k');
+    legend('good','bad');
+    hold off;
 
 %% Bild(ausschnitte) klassifizieren und gefundene Zellen markieren
 
 % Testbild laden
 img = im2double(rgb2gray(imread('CellDetectPreFreeze.jpg')));
+
 %img = im2double(rgb2gray(imread('CellDetectFreeze.jpg')));
 %img = im2double(rgb2gray(imread('CellDetectPostFreeze.jpg')));
 
@@ -157,7 +165,7 @@ img = im2double(rgb2gray(imread('CellDetectPreFreeze.jpg')));
             Zellwand_i = mean(im(mask== 1 ));
             Merkmal_i = Zellkerns_i - Zellwand_i;
 
-            if   Merkmal_i<= max(pd_pos) && Merkmal_i>= a 
+            if Merkmal_i >= a 
                  img_Cell(i+50,j+50)=1; % bestimmt Zellkern    
             end
         end
@@ -182,7 +190,7 @@ img = im2double(rgb2gray(imread('CellDetectPreFreeze.jpg')));
     
  %% Mean-Shift Clustering
  X = [col, row ];
- [L, C] = meanshift(X, 15, 0);
+ [L, C] = meanshift(X, 15, 1);
  
  
  figure(6), imshow('CellDetectPreFreeze.jpg');

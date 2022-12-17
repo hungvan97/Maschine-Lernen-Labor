@@ -4,7 +4,7 @@ clc;
 
 %% Daten laden
 load('ShapeContextData.mat')
-aufgabe = "2a";
+aufgabe = "2c";
 
 %% Shape Context für alle Trainingsdaten bestimmen
 %  Einfache Variante: Bestimme Histogramm für Bildmittelpunkt
@@ -26,7 +26,7 @@ for it = 1:size(train_data, 3)
     if aufgabe == "2a"
         SC_train(:, :, it) = scCompute([0.5, 0.5], X, nBinsTheta, nBinsR, rMin, rMax);
     else
-        SC_train(:, :, [it*50-49:it*50]) = scCompute(X, X, nBinsTheta, nBinsR, rMin, rMax);
+        SC_train(:, :, [it*50-49 : it*50]) = scCompute(X, X, nBinsTheta, nBinsR, rMin, rMax);
     end  
 end
 

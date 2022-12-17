@@ -60,7 +60,7 @@ function SC = scCompute(P, X, nBinsTheta, nBinsR, rMin, rMax)
         for i = 1:m
             xX_P = X(i, 1) - P(j, 1);
             yX_P = X(i, 2) - P(j, 2);
-            thetaX_P(i, j) = atan2(xX_P, yX_P);
+            thetaX_P(i, j) = atan2(xX_P, yX_P); % use repmat
         end
     end
     
@@ -70,7 +70,7 @@ function SC = scCompute(P, X, nBinsTheta, nBinsR, rMin, rMax)
     
     
         % TODO
-    theta_group = linspace(-pi, pi, nBinsTheta);
+    theta_group = linspace(-pi, pi, nBinsTheta+1);
     
     % b) Weise Punkte in X den entsprechenden Bins zu
     thetaLabel = zeros(m, n);

@@ -10,8 +10,8 @@ data = load('ShapeContextData.mat');
 %     end
 % end
 
-zif1 = data.train_data(:, :, 5);
-zif2 = data.train_data(:, :, 13);
+zif1 = data.train_data(:, :, 2);
+zif2 = data.train_data(:, :, 3);
 
 % add Parameter for scComputer
 nPoints = 50;
@@ -77,7 +77,7 @@ disp(['Different between 2 histogram is: ', num2str(hc_diff)]);
 if hc_diff < 0.4
     disp('Quite similar, huh!!');      % got this result when compare two "3" at image 5, 9 
 else
-    disp('Not so similar');         % got this result when compare two "1" at image 2, 3 (or 2, 7)
+    disp('Not so similar');         % got this result when compare two "1" at image 2, 3 (or 2, 7) / or "0" with "6" (49, 41)
 end
 
 % helper function
