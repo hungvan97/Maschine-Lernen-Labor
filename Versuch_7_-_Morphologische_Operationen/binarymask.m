@@ -30,7 +30,7 @@ imgCorrupt = imbinarize(imread("./bilder/silhouette_corrupted.jpg"));
 figure(2);
 subplot(2,3,1), imshow(imgCorrupt), title('Original Image Corrupt');
 
-cl = imclose(imgCorrupt, strel("square", 6));
+cl = imclose(imgCorrupt, strel("square", 7));
 op = imopen(cl, strel("disk", 9));
 line90 = imclose(op, strel('line', 12, 90));  % vertical gap from row 350 - 360 ( col > 490 ) ==> dilate still fine
 line0 = imclose(line90, strel('line', 12, 0));% horizontal gap from col 350 - 360 ( row > 700 ) ==> dilate still fine

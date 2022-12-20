@@ -1,0 +1,29 @@
+% 2b
+I = imread ('./bilder/silhouette.jpg');
+threshold = 6;
+imshow(I);
+[x, y] = ginput(1);
+x = round(x); y = round(y);
+
+mask = false(size(I)); 
+mask(y, x) = true;
+while any(mask(:))
+    % 2. epsilon: Mittelwerte in der segmentierten Region M
+    epsilon = mean(I(mask == 1));
+    % 3. bestimmen der neue Nachbarn N(M)
+    maskN = imdilate(mask, ones(3, 3)) - mask;
+    % 4. Aufnahme der ähnlichen Nachbarn in die segmentierte Region
+    temp = (abs(I - epsilon) < threshold);
+    % intersection with N(M)
+    temp_2 = maskN - temp == 0;
+    % union with mask M
+    mask_neu = mask 
+    
+    
+    temp_1 = maskN + temp;     % vereinigen
+    temp_1(temp_1 ~= 0) = 1;
+    mask = abs(mask - temp_1); % durchschnitt
+end
+
+region = I .* uint8(mask);
+imshow(region);
