@@ -2,8 +2,8 @@
 clear,clc;
 
 % Bild einlesen
-% I=imread('./bilder/coins.png');
-I=imread('./bilder/rectangle.png');
+I=imread('./bilder/coins.png');
+%I=imread('./bilder/rectangle.png');
 % I(120, 199)
 % I(120, 202)
 figure(1),clf,subplot(2,2,1),imshow(I),title('Bild');
