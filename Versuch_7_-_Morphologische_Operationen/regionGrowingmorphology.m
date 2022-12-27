@@ -2,6 +2,7 @@
 function mask = regionGrowingMorphology(I, xStart, yStart, threshold)
     mask = false(size(I)); 
     mask(yStart, xStart) = true;
+    I = im2double(I);
     while 1
         % 2. epsilon: Mittelwerte in der segmentierten Region M
         mittleWert = mean(I(mask == 1));
@@ -10,9 +11,9 @@ function mask = regionGrowingMorphology(I, xStart, yStart, threshold)
         % 4. Aufnahme der ähnlichen Nachbarn in die segmentierte Region
         temp_1 = abs(I - mittleWert) < threshold;
             % intersection with N(M)
-        temp_2 = maskN + temp_1 == 2;
+        temp_2 = ((maskN + temp_1) == 2);   
             % union with mask M
-        mask_neu = mask + temp_2 ~= 0;
+        mask_neu = ((mask + temp_2) ~= 0);
         if mask_neu == mask
             break;
         else

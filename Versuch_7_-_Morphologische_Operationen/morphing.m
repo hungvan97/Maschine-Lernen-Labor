@@ -11,13 +11,14 @@ function vid = morphing(A, B, n)
 
         % TODO
         D_i = (1 - i/n)*D_a + D_b*i/n;
-        for j = 1:size(C, 1)
-            for k = 1:size(C, 2)
-                if D_i(j, k) <= 0
-                    C(j, k) = 1;
-                end
-            end
-        end
+%         for j = 1:size(C, 1)
+%             for k = 1:size(C, 2)
+%                 if D_i(j, k) <= 0
+%                     C(j, k) = 1;
+%                 end
+%             end
+%         end
+        C = D_i<=0;
         imshow(C);
         vid(i+1) = getframe();
     end

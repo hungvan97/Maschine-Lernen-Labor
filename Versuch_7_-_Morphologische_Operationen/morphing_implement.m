@@ -1,5 +1,5 @@
 data = load("shapes.mat");
 A = data.stern;
 B = data.rechteck;
-n = 5;
+n = 15;
 morphing(A, B, n);

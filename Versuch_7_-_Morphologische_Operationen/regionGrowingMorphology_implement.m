@@ -1,5 +1,6 @@
 I = rgb2gray(imread("./bilder/Emphysem.png"));
-threshold = 20;
+I = imread("./bilder/coins.png");
+threshold = 40;
 imshow(I);
 [x, y] = ginput(1);
 xStart = round(x); yStart = round(y);

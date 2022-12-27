@@ -6,17 +6,17 @@ mask = data.kreis;
 
 % 1b
 img_hole = imbinarize(imread("./bilder/silhouette_holes.jpg"));
-se_hole = strel("disk", 6);
+se_hole = strel("disk", 8);
 closedImage  = imclose(img_hole, se_hole);
 
 figure(1);
 subplot(2,2,1), imshow(img_hole), title('Original Image');
 subplot(2,2,2), imshow(closedImage), title('Closing Image');
 
-% 1c
+%% 1c
 imgLine = imbinarize(imread("./bilder/lines.jpg"));
-mask_line = 10;
-mask_deg = 90;
+mask_line = 30;
+mask_deg = 45;
 se_line = strel('line', mask_line, mask_deg);
 openImageLine = imopen(imgLine, se_line);
 
@@ -24,14 +24,14 @@ figure(1);
 subplot(2,2,3), imshow(imgLine), title('Original Image Line');
 subplot(2,2,4), imshow(openImageLine), title('Open Image Line');
 
-% 1d
+%% 1d
 imgCorrupt = imbinarize(imread("./bilder/silhouette_corrupted.jpg"));
 
 figure(2);
 subplot(2,3,1), imshow(imgCorrupt), title('Original Image Corrupt');
 
-cl = imclose(imgCorrupt, strel("square", 7));
-op = imopen(cl, strel("disk", 9));
+cl = imclose(imgCorrupt, strel("square", 9));
+op = imopen(cl, strel("disk", 10));
 line90 = imclose(op, strel('line', 12, 90));  % vertical gap from row 350 - 360 ( col > 490 ) ==> dilate still fine
 line0 = imclose(line90, strel('line', 12, 0));% horizontal gap from col 350 - 360 ( row > 700 ) ==> dilate still fine
 imnew = imdilate(line0, strel("disk", 10));
