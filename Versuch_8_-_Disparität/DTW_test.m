@@ -10,5 +10,5 @@ xlabel('Kostenmatrix');
 
 subplot(122);
 imagesc(D); axis xy; axis image;
-hold on; plot(p2, p1, '.r', 'MarkerSize', 20); hold off;
+hold on; plot(p2, p1, '.r', 'MarkerSize', 20); hold off; colorbar;
 xlabel('Distanzmatrix');

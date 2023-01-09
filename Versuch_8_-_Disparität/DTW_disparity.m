@@ -20,10 +20,9 @@ subplot(122); imshow(I2);
 
 %%
 D = zeros(size(I1));
-E = zeros(size(I1));
-occlusionWeight = 1;
-maxDisp = 50;
-windowSize = 5;
+occlusionWeight = 10;
+maxDisp = 4;
+windowSize = 3;
 
 for i = 1 + (windowSize - 1) / 2:size(I1, 1) - (windowSize - 1) / 2
     v1 = zeros(windowSize^2, size(I1, 2));
@@ -40,14 +39,13 @@ for i = 1 + (windowSize - 1) / 2:size(I1, 1) - (windowSize - 1) / 2
     
     for j = 1 + (windowSize - 1) / 2:size(I1, 2) - (windowSize - 1) / 2
         % TODO
+        % D(i, j) = find(p1 == j, 1, 'first') - find(p2 == j, 1, 'first');
         p1_found = find(p1 == j, 1, 'first');
         p2_found = find(p2 == j, 1, 'first');
         if (isempty(p1_found) || isempty(p2_found))
-            D(i, j) = -Inf;
-%             E(i, j) = Inf;
+            D(i:i+(windowSize-1)/2, j:j+(windowSize-1)/2) = -Inf;
         else 
-            D(i, j) = p1_found - p2_found;
-%             E(i, j) = p1_found - p2_found;
+            D(i:i+(windowSize-1)/2, j:j+(windowSize-1)/2) = p1_found - p2_found;
         end
     end
 end
@@ -59,7 +57,3 @@ imagesc(D); colormap(gray);
 figure(3); clf;
 [X, Y] = meshgrid(1:size(I1, 2), 1:size(I2, 1));
 surf(X, Y, D); shading flat; axis ij;
-
-% figure(4); clf;
-% [X, Y] = meshgrid(1:size(I1, 2), 1:size(I2, 1));
-% surf(X, Y, E); shading flat; axis ij;

@@ -29,9 +29,9 @@ function [p1, p2, C, D] = DTW(v1, v2, weight, maxDisp)
     for i = 1:n1
         for j = 1:n2
             % SAD
-            C(i, j) = abs(v1(i) - v2(j));
+%            C(i, j) = abs(v1(i) - v2(j));
 %             % SSD
-%             C(i, j) = (v1(i) - v2(j))^2;
+            C(i, j) = (v1(i) - v2(j))^2;
             D(i, j) = C(i, j) + min(addNeighbor(D, i, j));
             M(i, j) = minPos(weight, C(i,j), D, i, j);
         end
