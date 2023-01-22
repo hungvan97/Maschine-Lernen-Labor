@@ -12,13 +12,12 @@ Xw = [0, 0, 0; ... % 1 Ecke 1,3,5 (gelb, rot, blau)
       6, 6, 0; ... % 6 Ecke 4,5,6 (magenta, blau, grün)
       0, 6, 6; ... % 7 Ecke 2,3,6 (cyan, rot, grün)
       6, 6, 6];    % 8 Ecke 2,4,6 (cyan, magenta, grün)
+Xw_orginal = Xw;
      
 %% Plotte Kalibrierungsobjekt
 figure(1); clf;
 plotCube(Xw);
 view(-30, 30); axis on;
-hold on;
-
 
 %% Aufgabe 1b) Kalibrierung einer Kamera anhand eines Bildes
 % Projizierte Eckpunkte des Würfels bestimmen (getPoints.m)
@@ -104,10 +103,18 @@ C_right = null(P_right);
 C_left = C_left / C_left(4); 
 C_right = C_right / C_right(4);
 
-% Plot der 3D-Szene: Kalibrierungsobjekt und Kamerazentren
+%% Plot der 3D-Szene: Kalibrierungsobjekt und Kamerazentren
 
 % TODO
+figure(1);
 
+plot3(C_left(1), C_left(2), C_left(3), '.r');
+hold on;
+plot3(C_right(1), C_right(2), C_right(3), '.b');
+hold on;
+plotCube(Xw_orginal); view(-30, 30);
+axis equal;
+hold off;
 %% c) Rekonstruktion von 3D-Punkten mittels Triangulation
 
 % TODO
@@ -138,3 +145,12 @@ for i = 1:length(Xw_custom)
 end
 MSE_left_custom = MSE_left_custom / length(Xw_custom);
 MSE_right_custom = MSE_right_custom / length(Xw_custom);
+
+%% Visualisierung 2 Xw
+Xw_custom_original = [Xw_custom(1:5, :);[6 6 0];Xw_custom(6:end, :)];
+figure(2);
+plotCube(Xw_custom_original); view(-30, 30);
+hold on;
+plotCube(Xw_orginal); view(-30, 30);
+axis equal;
+hold off;

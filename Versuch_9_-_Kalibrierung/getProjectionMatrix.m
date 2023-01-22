@@ -24,11 +24,8 @@ function P = getProjectionMatrix(Xw, Ximg)
     pre_P_ohne_letzte_Spalte = pre_P(:, 1:end-1);
     pre_P_letzte_Spalte = pre_P(:, end);
       
-         
-%     P = svd([pre_P, zeros(2*n, 1)]); 
+          
     P_ohne_1 = pre_P_ohne_letzte_Spalte\(pre_P_letzte_Spalte*(-1));
-%     P = svd(pre_P);
-%     P_ohne_1 = pinv(pre_P_ohne_letzte_Spalte)*(pre_P_letzte_Spalte*(-1));
     P = [P_ohne_1; 1];
     P = (reshape(P, [4, 3]))';
 end

@@ -11,6 +11,5 @@ function X = myTriangulation(x1, x2, P1, P2)
      pre_XYZ_ohne_letzte_Spalte = pre_XYZ(:, 1:end-1);
      pre_XYZ_letzte_Spalte = pre_XYZ(:, end);
      X = pre_XYZ_ohne_letzte_Spalte\(pre_XYZ_letzte_Spalte*(-1)); % X := XYZ_ohne_1
-     X = X';
-             
+     X = X';      
 end

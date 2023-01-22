@@ -16,4 +16,5 @@ function plotCube(X)
     set(p, 'FaceColor', 'flat', 'CData', cdata)
     
     axis equal; 
+    
 end
