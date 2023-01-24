@@ -56,27 +56,32 @@ hold on;
 plot3([DV(1) DV(1)+D(2,2)*V(1,2)], [DV(2) DV(2)+D(2,2)*V(2,2)], [DV(3) DV(3)+D(2,2)*V(3,2)], 'r');
 hold on;
 plot3([DV(1) DV(1)+D(3,3)*V(1,3)], [DV(2) DV(2)+D(3,3)*V(2,3)], [DV(3) DV(3)+D(3,3)*V(3,3)], 'r');
-hold off
-title("Visualisierung der Hauptachsen");
+hold on;
+
 
 %% d)
 % Projektion auf eine der Hauptachsen über Skalarprodukt
 % Tipp: Eigenvektoren haben die Länge 1
 
 % TODO
-VN = V(:, 1:3);
+index_projekted_axis = [2, 3];   % choose the Hauptachsen to be projected on, index 3 got the largest Eigenvalue
+VN = V(:, index_projekted_axis); 
 VT = pinv(VN);
-figure(2);
+e = 0;                           % mittleren quadratischen Rekonstruktionfehler
+% figure(2)
 for i = 1:n
     p = X(i, :);
     
-    projected = (p - DV)* VN;
-    plot(projected', 'ob');
+    alpha_projected = (p - DV)* VN;                     % nenner unnotwendig, cuz eigenvektor hat Length = 1; alpha_projected := projected point to choosen Hauptachse
+    p_reconstructed = alpha_projected * VT + DV;        % for Teilaufgabe e,f
+    e = e + (norm(p_reconstructed - p))^2;
+    
+%     plot(alpha_projected, 'ob');
+    plot3(p_reconstructed(1), p_reconstructed(2), p_reconstructed(3), 'or');
     hold on;
 end
 hold off;
-title("Projektion in 1D-Unterraum");
-
+title(['Visualisierung der Hauptachsen mit Rekonstruktionfehler = ', num2str(e/(n-1))]);
 % Varianz in der Projektion
 
 % TODO
@@ -86,15 +91,15 @@ title("Projektion in 1D-Unterraum");
 % Rekonstruktion aus 1D-Unterraum und Plot
 
 % TODO
-
+% combined above
 
 %% f)
 % Projektion in den 2D-Unterraum der ersten beiden Hauptkomponenten und Rekonstruktion
 
 % TODO
-
+% combined above
 
 % mittlerer quadratischer Rekonstruktionsfehler
 
 % TODO
-
+e = e / (n-1);
