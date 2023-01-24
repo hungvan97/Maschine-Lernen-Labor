@@ -139,7 +139,7 @@ imshow(F_res);
 %% e) Rekonstruktion ohne exakte Trainingsdaten
 %  -> Wiederholen Sie obige Schritte, ohne dass Bilder der zu
 %  rekonstruierenden Person in den PCA-Raum integriert werden, d.h. laden
-%  Sie Bilder von Person 8 nicht zum Training. ????
+%  Sie Bilder von Person 8 nicht zum Training.
 
 % TODO
 
