@@ -1,6 +1,3 @@
-clear all;
-close all;
-
 %% Beispielgesichter (Trainingsdaten) laden
 CPath = './att_faces/';         % actual face, quantity: 40
 ReconPath = './recon_faces/';   % reconstruction face from actual face number 8th, 11th
@@ -15,15 +12,15 @@ Img = im2double(imread(filename));
 F = [];
 % fülle Datenmatrix
 for sub = 1:subjects
-%     if sub ~= 8
-    for im = 1:images
-        filename = cat(2, CPath, 's', num2str(sub), '/', num2str(im), '.pgm');
-        if (exist(filename, 'file'))
-            % Speicher Bilder spaltenweise
-            F = [F, reshape(im2double(imread(filename)), [], 1)];
+    if sub ~= 8
+        for im = 1:images
+            filename = cat(2, CPath, 's', num2str(sub), '/', num2str(im), '.pgm');
+            if (exist(filename, 'file'))
+                % Speicher Bilder spaltenweise
+                F = [F, reshape(im2double(imread(filename)), [], 1)];
+            end
         end
     end
-%     end
 end
 
 %% a) Erstellung des PCA-Raums
@@ -52,55 +49,22 @@ zero_mean_face = F - mean_face;
 % Verwenden Sie imagesc oder normalisieren Sie die Bilder.
 
 % TODO
-idx = 300;
+d = 390;
 row = size(Img, 1);
 col = size(Img, 2);
-eigenface = reshape(U(:, idx) * S(idx, idx), row, col);
+eigenface = reshape(U(:, d) * S(d, d), row, col);
 eigenface = histeq(eigenface, 255);
 imagesc(eigenface);
 
-%% c) Bildrekonstruktion aus dem Unterraum
+% d) Rekonstruktion fehlender Daten
 filename = cat(2, ReconPath, num2str(8), '.pgm');
 img_to_reconstruct = im2double(imread(filename));
 F_original = reshape(img_to_reconstruct, [], 1);
-
-% Anzahl Eigenfaces
-% Testen Sie auch verschiedene Werte!
-d = 300;
-
-% ersten d Eigenvektoren (Eigenfaces) auswählen
-
-% TODO
-U_d = U(:, 1:d);
-% Mittelwert vom Bild abziehen
-
-% TODO
-F_neu = F_original - mean_face;
-% Projektion in den Unterraum
-
-% TODO
-F_projected = F_neu' * U_d;
-% Rekonstruktion aus dem Unterraum
-
-% TODO
-U_d_T = pinv(U_d);
-F_reconstruct = (F_projected * U_d_T)' + mean_face;
-% Rekonstruktion darstellen
-
-% TODO
-F_res = reshape(F_reconstruct, size(img_to_reconstruct, 1), size(img_to_reconstruct, 2));
-figure(3)
-imagesc(img_to_reconstruct);
-figure(4)
-imagesc(F_res);
-
-%% d) Rekonstruktion fehlender Daten
 filename = cat(2, ReconPath, num2str(11), '.pgm');
 img_to_reconstruct_fehler = im2double(imread(filename));
-%%
 F_corrupted = reshape(img_to_reconstruct_fehler, [], 1);
 
-%% Bereich fehlender Daten bestimmen
+% Bereich fehlender Daten bestimmen
 % load histogram, find value at the far left <== hist(F_corrupted)
 
 % TODO
@@ -118,8 +82,7 @@ while(fehler_kriterien ~= 0)
 
     % Projektion in den Unterraum
     F_projected_fehler = F_neu_fehler' * U_d_fehler;
-    % figure(5)
-    % plot(F_projected_fehler, 'ob');
+
     % Rekonstruktion aus dem Unterraum
     U_d_T_fehler = pinv(U_d_fehler);
     F_reconstruct_fehler =  (F_projected_fehler * U_d_T_fehler)' + mean_face_fehler;
@@ -133,21 +96,7 @@ while(fehler_kriterien ~= 0)
     fehler_kriterien = fehler_kriterien - size(F_fehler);
 end
 
-F_res = reshape(F_corrupted, size(img_to_reconstruct_fehler, 1), size(img_to_reconstruct_fehler, 2));
-imshow(F_res);
-
-%% e) Rekonstruktion ohne exakte Trainingsdaten
-%  -> Wiederholen Sie obige Schritte, ohne dass Bilder der zu
-%  rekonstruierenden Person in den PCA-Raum integriert werden, d.h. laden
-%  Sie Bilder von Person 8 nicht zum Training.
-
-% TODO
-
-
-%% *Rekonstruktion des eigenen Gesichts
-% Mit webcam_simple.mlapp kann ein Bild aufgenommen werden.
-% Mit prepareFace kann ein passender Bildausschnitt gewählt werden.
-% Erfordert Image Acquisition Toolbox + Support Package for OS Generic Video Interface
-
-% TODO
-
+img_res_wt8 = reshape(F_corrupted, size(img_to_reconstruct_fehler, 1), size(img_to_reconstruct_fehler, 2));
+imshow(img_res_wt8);
+img_8 = im2double(imread('./recon_faces/8.pgm'));
+evwt8 = norm(img_res_wt8 - img_8);

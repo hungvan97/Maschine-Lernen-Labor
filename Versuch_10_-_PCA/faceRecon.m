@@ -66,7 +66,7 @@ F_original = reshape(img_to_reconstruct, [], 1);
 
 % Anzahl Eigenfaces
 % Testen Sie auch verschiedene Werte!
-d = 300;
+d = 10;
 
 % ersten d Eigenvektoren (Eigenfaces) auswählen
 
@@ -94,13 +94,13 @@ imagesc(img_to_reconstruct);
 figure(4)
 imagesc(F_res);
 
-%% d) Rekonstruktion fehlender Daten
+% d) Rekonstruktion fehlender Daten
 filename = cat(2, ReconPath, num2str(11), '.pgm');
 img_to_reconstruct_fehler = im2double(imread(filename));
-%%
+%
 F_corrupted = reshape(img_to_reconstruct_fehler, [], 1);
 
-%% Bereich fehlender Daten bestimmen
+% Bereich fehlender Daten bestimmen
 % load histogram, find value at the far left <== hist(F_corrupted)
 
 % TODO
@@ -134,6 +134,7 @@ while(fehler_kriterien ~= 0)
 end
 
 F_res = reshape(F_corrupted, size(img_to_reconstruct_fehler, 1), size(img_to_reconstruct_fehler, 2));
+figure(10)
 imshow(F_res);
 
 %% e) Rekonstruktion ohne exakte Trainingsdaten
@@ -150,4 +151,3 @@ imshow(F_res);
 % Erfordert Image Acquisition Toolbox + Support Package for OS Generic Video Interface
 
 % TODO
-
