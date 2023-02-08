@@ -1,16 +1,18 @@
-function [p, particles] = particleFilterTracking(M, particles)
+function [p, X, particles] = particleFilterTracking(M, input, particles)
 % Partikelfilter zum Verfolgen von Bereichen mit einer bestimmten Farbe.
 %
 % Eingabe: M         - Video, (m x n x 3 x t)-Array
+%          input     - RGB value of Starting point
 %          particles - bekannte Partikel aus früherer Anwendung (optional,
 %                      benötigt für Webcam)
+%          
 % Ausgabe: p         - (2 x t)-Array, verfolgter Pfad
 %          particles - letzte bekannte Partikel (benötigt für Webcam)
     
     % Initialisierung
     [m, n, ~, t] = size(M);
     
-    if nargin < 2
+    if nargin < 3
         % Erzeuge Partikel
         nParticle = 50;
         [X, V] = createParticles(m, n, nParticle);
@@ -21,14 +23,14 @@ function [p, particles] = particleFilterTracking(M, particles)
     end
     
     p = zeros(2, t);
-    for i = 1:100
+    for i = 1:t
         I = M(:, :, :, i);
         
         % Verschiebe Partikel
         [X, V] = updateParticles(X, V);
         
         % Bestimme Likelihood
-        L = likelihood(X, I);
+        L = likelihood(X, I, input);
         
         % Bestimme Mittelpunkt
         p(1:2, i) = L / sum(L) * X';
@@ -41,7 +43,7 @@ function [p, particles] = particleFilterTracking(M, particles)
         particles.V = V;
         
         % plot
-        if nargin < 2
+        if nargin < 3
             figure(2);
             imshow(I);
             hold on
@@ -71,13 +73,13 @@ function [X_updated, V_updated] = updateParticles(X, V)
     % Verschiebe X und aktualisiere Geschwindigkeit
     
         % TODO
-    normMovement = normpdf(X, 0, stdMovement);
-    normVerlocity = normpdf(V, 0, stdVelocity);
+    normMovement = normrnd(0, stdMovement, size(X));
+    normVerlocity = normrnd(0, stdVelocity, size(V));
     X_updated = X + V + normMovement;
     V_updated = 1/2 * (V + X_updated - X) + normVerlocity;  
 end
 
-function L = likelihood(X, I)
+function L = likelihood(X, I, input)
     
     % Initialisierung
     [m, n, ~] = size(I);
@@ -85,7 +87,8 @@ function L = likelihood(X, I)
     I = double(I);
     
     stdColor = 50;
-    meanColor = [255, 0, 0];
+%     meanColor = [255, 0, 0];
+    meanColor = input;
     
     L = zeros(1, nParticles);
     
@@ -102,26 +105,27 @@ end
 
 function [X_sampled, V_sampled] = resampleParticles(X, V, L)
     
-%     % Schätze Verteilungsfunktion der Partikel
-%     % CDF from the weight of particle
-%         % TODO
-%     F = cumsum(L)/sum(L);
-%     % Ziehe zufällig Partikel aus der obigen Verteilungsfunktion
-%     
-%         % TODO
-%     length = size(X, 2);
-%     z = rand(1, length);
-%     % Resampling
-%     
-%         % TODO
-%     X_sampled = zeros(2, length);
-%     V_sampled = zeros(2, length);
-%     j = 1;
-%     for i = 1:length
-%         while z(i) > F(j)
-%             j = j+1;
-%         end
-%         X_sampled(:, i) = X(:, j);
-%         V_sampled(:, i) = V(:, j);
-%     end
+    % Schätze Verteilungsfunktion der Partikel
+    % CDF from the weight of particle
+        % TODO
+    F = cumsum(L)/sum(L);
+    % Ziehe zufällig Partikel aus der obigen Verteilungsfunktion
+    
+        % TODO
+    length = size(X, 2);
+    z = rand(1, length);
+    z = sort(z);
+    % Resampling
+    
+        % TODO
+    X_sampled = zeros(2, length);
+    V_sampled = zeros(2, length);
+    j = 1;
+    for i = 1:length
+        while z(i) > F(j)
+            j = j+1;
+        end
+        X_sampled(:, i) = X(:, j);
+        V_sampled(:, i) = V(:, j);
+    end
 end

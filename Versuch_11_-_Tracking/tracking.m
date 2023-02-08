@@ -19,7 +19,8 @@ frames = frames(:, :, :, 2:end);
 
 %% Aufgabe 1: Block Matcher
 figure(1); clf;
-imshow(frames(:, :, :, 1));
+frame_1 = frames(:, :, :, 1);
+imshow(frame_1);
 title('Wähle Startpunkt!')
 
 [x, y] = ginput(1);
@@ -27,10 +28,10 @@ x = round(x);
 y = round(y);
 
 close all;
-p = TDLS(frames, x, y, 25);
+p = TDLS(frames, x, y, 10);
 
 % Pfad
-for fr = 1:299
+for fr = 1:size(p, 2)
     figure(1);
     imshow(frames(:, :, :, fr));
     hold on;
@@ -41,7 +42,7 @@ end
 
 %% Aufgabe 2: Partikelfilter
 close all;
-p = particleFilterTracking(frames);
+[p, X] = particleFilterTracking(frames, double([frame_1(y, x, 1), frame_1(y, x, 2), frame_1(y, x, 3)]));
 
 %% Pfad
 for i = 1:size(p, 2)
